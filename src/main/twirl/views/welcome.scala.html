@@ -1,0 +1,16 @@
+@layouts.html.default("Bike stations of Oslo", "Velkommen til den enkleste bysykkel oversikten i by'n!") {
+    <div class="container-fluid">
+
+        <a href="/bysykkelstativ/status/">Oversikt over ledige sykler og låser i sanntid</a>
+        <h2>REST api for ledige sykler og låser på Oslos bysykkelstativ</h2>
+        <a href="/api/status/all">Alle stasjoner</a>
+        <div class="container-fluid">
+            Finn en stasjon git id:
+            <a href="/api/status/station_id/623">Eksempel stasjon med id 623</a>
+        </div>
+        <div class="container-fluid">
+            Finn en stasjon gitt navn
+        <a href="/api/status/name/pilestredet">Eksempel Pilestredet</a>
+        </div>
+    </div>
+}

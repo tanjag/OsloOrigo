@@ -1,0 +1,35 @@
+@import com.github.tanjag.bikeapp.model.BikeStationCapacityStatus
+@(stationList: List[BikeStationCapacityStatus])
+@layouts.html.default("Bike stations of Oslo", "Velkommen til den enkleste bysykkeloversikten i by'n!") {
+    <div class="container-fluid">
+
+    @if(stationList.size == 0) {
+        <p>Beklager listen over ledige sykler er ikke tilgjengelig for øyeblikket, prøv igjen litt seinere!</p>
+    } else {
+
+        <p>Good news everyone! Det er @stationList.size bysykkelstativ i Oslo, under finner du ledige sykler og låser per stativ.</p>
+    </div>
+    <div class="container-fluid">
+
+        <table class="table table-striped">
+            <tr>
+                <th scope="col">Navn</th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Ledige sykler</th>
+                <th scope="col">Ledige låser</th>
+            </tr>
+            @for(station <- stationList) {
+                <tr>
+                    <td>@station.name</td>
+                    <td><a target="_blank" href="@station.googleMapUrl"> @station.address</a></td>
+                    <td>@station.num_bikes_available</td>
+                    <td>@station.num_docks_available</td>
+                </tr>
+            }
+
+        </table>
+
+        }
+    </div>
+
+}
