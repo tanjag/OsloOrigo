@@ -26,7 +26,7 @@ En liste over de ulike stasjonene, og hvor mange tilgjengelige låser og ledige 
 
 ### Oppgave 2 - REST endepunkt
 Rot for alle REST endepunktene er: 
-[http://localhost:8080/bysykkelstativ/api/](http://localhost:8080/bysykkelstativ/api/)
+[http://localhost:8080/api/](http://localhost:8080/api/)
 
 #### GET alle stasjoner med status
 ```
