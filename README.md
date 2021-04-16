@@ -24,4 +24,32 @@ En liste over de ulike stasjonene, og hvor mange tilgjengelige låser og ledige 
 [http://localhost:8080/bysykkelstativ/status/](http://localhost:8080/bysykkelstativ/status/)
 
 ### Oppgave 2 - REST endepunkt
+Rot for alle REST endepunktene er: 
 [http://localhost:8080/bysykkelstativ/api/](http://localhost:8080/bysykkelstativ/api/)
+
+#### GET alle stasjoner med status
+```
+http://localhost:8080/api/status/all
+```
+
+#### GET spesifikk stasjon status gitt id
+Id sendes inn som parameter, tolkes som string.  
+```
+http://localhost:8080/api/status/station_id/{:id}
+```
+
+#### GET spesifikk stasjon status gitt navn
+Navn sendes inn som en parameter, tolkes som string.
+```
+http://localhost:8080/api/status/name/{:name}
+```
+
+#### GET alle stasjoner med ledig sykkel i øyeblikket
+```
+http://localhost:8080/api/status/bikes_available
+```
+
+#### GET alle stasjoner med ledig lås i øyeblikket
+```
+http://localhost:8080/api/status/docks_available
+```
