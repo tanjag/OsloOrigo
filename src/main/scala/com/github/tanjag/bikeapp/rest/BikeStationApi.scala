@@ -18,11 +18,15 @@ class BikeStationApi(controller: BikeStationController) extends ScalatraServlet 
 
   error {
     case e: Throwable => {
+      logger.error(s"Error thrown in  REST api:[${e.getMessage}]")
       status = 503
       RestErrors(List(Error(503, s"${e.getMessage}")))
     }
   }
 
+  get("/") {
+    redirect("/api/status/all")
+  }
 
   get("/status/all/?") {
     val statuses = controller.getCurrentStationsStatus()

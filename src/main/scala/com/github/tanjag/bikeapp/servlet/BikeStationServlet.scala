@@ -20,9 +20,6 @@ class BikeStationServlet(controller: BikeStationController) extends ScalatraServ
     redirect("/bysykkelstativ/status")
   }
 
-  get("/testerror"){
-    throw new RuntimeException("huffda")
-  }
   get("/status/?") {
     logger.debug("hit on GET status")
     val status: List[BikeStationCapacityStatus] = controller.getCurrentStationsStatus()
