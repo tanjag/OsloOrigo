@@ -5,15 +5,16 @@ Prosjektet er skrevet i ```scala 2.12``` med [Scalatra](https://scalatra.org/)  
 
 ## Build 
 
-Bygg prosjektet med
+Prosjektet bygges med sbt i topp mappen:
 ```
-sbt
+> cd OsloOrigo
+> sbt
 ```
 
 ## Run
-Kjør prosjektet inni ```sbt``` consolet med:
+Kjør opp prosjektet inni ```sbt``` consolet med jetty:
 ```
-jetty:start
+sbt:Bike Station Web App> jetty:start
 ```
 
 Prosjektet kjører da på [http://localhost:8080/](http://localhost:8080/)
