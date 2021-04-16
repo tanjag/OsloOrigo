@@ -1,6 +1,7 @@
 package com.github.tanjag.bikeapp.rest
 
 import com.github.tanjag.bikeapp.controller.BikeStationController
+import com.github.tanjag.bikeapp.model.{Error, RestErrors}
 import org.json4s.{DefaultFormats, Formats}
 import org.scalatra.ScalatraServlet
 import org.slf4j.LoggerFactory
@@ -14,18 +15,22 @@ class BikeStationApi(controller: BikeStationController) extends ScalatraServlet 
   before() {
     contentType = formats("json")
   }
-  get("/status/all") {
 
-    logger.info("getting status for all stations")
+  error {
+    case e: Throwable => {
+      status = 503
+      RestErrors(List(Error(503, s"${e.getMessage}")))
+    }
+  }
+
+
+  get("/status/all/?") {
     val statuses = controller.getCurrentStationsStatus()
     statuses
   }
 
-  get("/status/station_id/:id") {
-
+  get("/status/station_id/:id/?") {
     val id = params("id")
-    logger.info(s"GET station id:$id")
-
     controller.getCurrentStationsStatus().find(_.station_id == id) match {
       case Some(station) => {
         logger.info(s"found station $station")
@@ -34,36 +39,32 @@ class BikeStationApi(controller: BikeStationController) extends ScalatraServlet 
       case None => {
         logger.info("NOT found set status to 404 and return empty json")
         status = 404
-        "{}"
+        RestErrors(List(Error(404, s"Status for station id:[$id] Not Found")))
       }
     }
 
   }
 
-  get("/status/name/:name") {
+  get("/status/name/:name/?") {
     val name = params("name")
     controller.getCurrentStationsStatus().find(_.name.toLowerCase == name.toLowerCase()) match {
       case Some(station) => {
-        logger.info(s"found station $station")
         station
       }
       case None => {
-        logger.info("NOT found set status to 404 and return empty json")
         status = 404
-        "{}"
+        RestErrors(List(Error(404, s"Status for station name:[$name] Not Found")))
       }
     }
   }
 
-  get("/status/havebikes") {
+  get("/status/bikes_available/?") {
     val statuses = controller.getCurrentStationsStatus().filter(_.num_bikes_available > 0)
-    logger.info(s"No of stations with bikes ${statuses.size}")
     statuses
   }
 
-  get("/status/havedocks") {
+  get("/status/docks_available/?") {
     val statuses = controller.getCurrentStationsStatus().filter(_.num_docks_available > 0)
-    logger.info(s"No of stations with docks ${statuses.size}")
     statuses
   }
 
